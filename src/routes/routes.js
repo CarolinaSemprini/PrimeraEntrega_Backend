@@ -22,10 +22,10 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:pid', async (req, res) => {
+router.get('/:productId', async (req, res) => {
     try {
         const products = await productManager.getProducts();
-        const productId = parseInt(req.params.pid);
+        const productId = parseInt(req.params.productId);
         const product = products.find((product) => product.id === productId);
 
         if (product) {
@@ -41,16 +41,23 @@ router.get('/:pid', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newProduct = req.body;
-        await productManager.addProduct(newProduct.title, newProduct.description, newProduct.price, newProduct.thumbnail, newProduct.code, newProduct.stock);
+
+        // Verificar si el campo quantity está presente en el cuerpo de la solicitud
+        if (!newProduct.hasOwnProperty('quantity')) {
+            throw new Error('El campo "quantity" es obligatorio');
+        }
+
+        await productManager.addProduct(newProduct.title, newProduct.description, newProduct.price, newProduct.thumbnail, newProduct.code, newProduct.stock, newProduct.quantity);
         res.json({ message: 'Producto agregado correctamente', product: newProduct });
     } catch (error) {
-        res.status(500).json({ error: 'Error al agregar un nuevo producto' });
+        res.status(500).json({ error: 'Error al agregar un nuevo producto', message: error.message });
     }
 });
 
-router.put('/:pid', async (req, res) => {
+
+router.put('/:productId', async (req, res) => {
     try {
-        const productId = req.params.pid;
+        const productId = req.params.productId;
         const updatedProduct = req.body;
         await productManager.updateProduct(productId, updatedProduct);
         res.json({ message: `Producto actualizado con ID: ${productId}`, product: updatedProduct });
@@ -59,9 +66,9 @@ router.put('/:pid', async (req, res) => {
     }
 });
 
-router.delete('/:pid', async (req, res) => {
+router.delete('/:productId', async (req, res) => {
     try {
-        const productId = req.params.pid;
+        const productId = req.params.productId;
         await productManager.deleteProduct(productId);
         res.json({ message: `Producto eliminado con ID: ${productId}` });
     } catch (error) {
@@ -69,7 +76,7 @@ router.delete('/:pid', async (req, res) => {
     }
 });
 
-// Ruta para crear un nuevo carrito
+/* Ruta para crear un nuevo carrito
 router.post('/api/carts/', async (req, res) => {
     try {
         // Lógica para crear un nuevo carrito utilizando CartManager
@@ -78,7 +85,7 @@ router.post('/api/carts/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Error al crear un nuevo carrito' });
     }
-});
+});*/
 
 
 module.exports = router;

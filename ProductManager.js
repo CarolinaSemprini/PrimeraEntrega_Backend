@@ -34,13 +34,40 @@ class ProductManager {
     // Método que genera un nuevo ID para un producto
     async generateIds() {
         try {
-            const counter = this.products.length;
-            return counter === 0 ? 1 : this.products[counter - 1].id + 1;
+            const products = await this.getProducts();
+            const counter = products.length;
+            return counter === 0 ? 1 : products[counter - 1].id + 1;
         } catch (error) {
             console.error("Error al generar IDs:", error);
             throw error;
         }
     }
+
+    // Método para obtener un producto por su ID
+    async getProductById(productId) {
+        try {
+            // Obtener la lista de productos
+            const products = await this.getProducts();
+
+            // Imprimir los IDs de los productos disponibles
+
+            const availableProductIds = products.map(product => product.id);
+            console.log("IDs de los productos disponibles:", products.map(product => product.id));
+
+            // Buscar el producto por su ID
+            const product = products.find(product => product.id === productId);
+
+            // Imprimir el ID del producto que estás intentando agregar al carrito
+            console.log("ID del producto que estás buscando:", productId);
+
+            return product; // Devolver el producto encontrado
+        } catch (error) {
+            console.error("Error al obtener el producto por ID:", error);
+            throw error;
+        }
+    }
+
+
 
     // Método que agrega un nuevo producto a la lista
     async addProduct(title, description, price, thumbnail, code, stock, status, category, thumbnails) {
@@ -88,7 +115,32 @@ class ProductManager {
             throw error;
         }
     }
+    //actualizar el stock de un producto después de que se haya agregado al carrito
+    async updateProductStock(productId, updatedStock) {
+        try {
+            const products = await this.getProducts(); // Obtener la lista de productos
+            const updatedProducts = products.map(product => {
+                if (product.id === productId) {
+                    product.stock = updatedStock;
+                }
+                return product;
+            });
+            await this.saveProducts(updatedProducts); // Guardar los productos actualizados
+        } catch (error) {
+            console.error("Error al actualizar el stock del producto:", error);
+            throw error;
+        }
+    }
 
+
+    async saveProducts(products) {
+        try {
+            await fs.writeFile(this.path, JSON.stringify(products, null, 2), { encoding: 'utf-8' });
+        } catch (error) {
+            console.error("Error al guardar los productos:", error);
+            throw error;
+        }
+    }
     // Método que busca un producto por código o da la opción de agregar uno nuevo y de actualizar
     async searchProductByCode() {
         try {

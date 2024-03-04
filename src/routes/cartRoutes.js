@@ -17,40 +17,48 @@ router.get('/', async (req, res) => {
 });
 
 // Ruta para crear un nuevo carrito
-router.post('/', async (req, res) => {
+router.post('/api/carts/', async (req, res) => {
     try {
-        await cartManager.createCart();
-        res.json({ message: 'Nuevo carrito creado' });
+        // Lógica para crear un nuevo carrito utilizando CartManager
+        const newCart = await cartManager.createCart();
+        res.json({ message: 'Nuevo carrito creado', cart: newCart });
     } catch (error) {
         res.status(500).json({ error: 'Error al crear un nuevo carrito' });
     }
 });
 
-// Ruta para obtener productos de un carrito por ID
-router.get('/:cid', async (req, res) => {
+// Ruta para obtener un carrito por su ID y ver sus productos
+router.get('/:cartId', async (req, res) => {
     try {
-        const cartId = req.params.cid;
-        const cartProducts = await cartManager.getCartProducts(cartId);
-        res.json({ message: `Obtener productos del carrito con ID: ${cartId}`, products: cartProducts });
+        const cartId = req.params.cartId;
+        const cart = await cartManager.getCartById(cartId);
+        if (!cart) {
+            return res.status(404).json({ error: 'Carrito no encontrado' });
+        }
+        return res.json(cart);
     } catch (error) {
-        res.status(500).json({ error: 'Error al obtener productos del carrito' });
+        console.error('Error al obtener el carrito por ID:', error);
+        return res.status(500).json({ error: 'Error al obtener el carrito por ID' });
     }
 });
 
-// Ruta para agregar un producto a un carrito
-router.post('/:cid/product/:pid', async (req, res) => {
-    try {
-        const cartId = req.params.cid;
-        const productId = req.params.pid;
-        const { quantity } = req.body; // Asegúrate de que la cantidad se envíe en el cuerpo de la solicitud
 
+// Ruta para agregar un producto a un carrito
+router.post('/:cartId/product/:productId', async (req, res) => {
+    try {
+        const cartId = req.params.cartId;
+        const productId = req.params.productId; // Asegúrate de que el nombre del parámetro sea correcto
+        const quantity = req.body.quantity; // Asegúrate de que la cantidad se envíe en el cuerpo de la solicitud
+
+        // Agregar el producto al carrito
         const updatedCart = await cartManager.addProductToCart(cartId, productId, quantity);
 
         res.json({ message: `Producto agregado al carrito con ID: ${cartId}`, cart: updatedCart });
     } catch (error) {
-        res.status(500).json({ error: 'Error al agregar producto al carrito' });
+        res.status(500).json({ error: error.message });
     }
 });
+
 
 
 module.exports = router;

@@ -1,46 +1,60 @@
 [
-    {
-      "id": 1,
-      "title": "Harina",
-      "description": "Leudante",
-      "price": 500,
-      "code": "P003",
-      "stock": 5,
-      "status": "true",
-      "category": "alimentos",
-      "thumbnails": [],
-      "thumbnail": [
-        "path/to/image3.jpg"
-      ],
-      "quantity": 2
-    },
-    {
-      "id": 2,
-      "title": "Producto 2",
-      "description": "Descripción del Producto 2",
-      "price": 29.99,
-      "code": "P002",
-      "stock": 5,
-      "status": true,
-      "category": "Ropa",
-      "thumbnails": [
-        "path/to/image3.jpg"
-      ],
-      "quantity": 5
-    },
-    {
-      "id": 3,
-      "title": "Vino",
-      "description": "Vino Dulce",
-      "price": 5000,
-      "thumbnail": "url",
-      "code": "P001",
-      "stock": 3,
-      "status": "true",
-      "category": "Bebidas",
-      "thumbnails": [
-        ""
-      ],
-      "quantity": 7
-    }
-  ]
+  {
+    "id": 1,
+    "title": "Harina",
+    "description": "Leudante",
+    "price": 500,
+    "code": "P003",
+    "stock": 10,
+    "status": "true",
+    "category": "alimentos",
+    "thumbnails": [],
+    "thumbnail": [
+      "path/to/image3.jpg"
+    ],
+    "quantity": 10
+  },
+  {
+    "id": 2,
+    "title": "Producto 2",
+    "description": "Descripción del Producto 2",
+    "price": 29.99,
+    "code": "P002",
+    "stock": 13,
+    "status": true,
+    "category": "Ropa",
+    "thumbnails": [
+      "path/to/image3.jpg"
+    ],
+    "quantity": 10
+  },
+  {
+    "id": 3,
+    "title": "Vino",
+    "description": "Vino Dulce",
+    "price": 5000,
+    "thumbnail": "url",
+    "code": "P001",
+    "stock": 5,
+    "status": "true",
+    "category": "Bebidas",
+    "thumbnails": [
+      ""
+    ],
+    "quantity": 10
+  },
+  {
+    "id": 4,
+    "title": "Manteca",
+    "description": "mantenca1",
+    "price": 500,
+    "thumbnail": "url",
+    "code": "P004",
+    "stock": 50,
+    "status": "TRUE",
+    "category": "Alimentos",
+    "thumbnails": [
+      ""
+    ]
+  }
+]
