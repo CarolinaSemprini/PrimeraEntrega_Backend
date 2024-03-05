@@ -5,7 +5,7 @@
     "description": "Leudante",
     "price": 500,
     "code": "P003",
-    "stock": 10,
+    "stock": 9,
     "status": "true",
     "category": "alimentos",
     "thumbnails": [],
@@ -20,7 +20,7 @@
     "description": "Descripción del Producto 2",
     "price": 29.99,
     "code": "P002",
-    "stock": 13,
+    "stock": 11,
     "status": true,
     "category": "Ropa",
     "thumbnails": [
@@ -35,7 +35,7 @@
     "price": 5000,
     "thumbnail": "url",
     "code": "P001",
-    "stock": 5,
+    "stock": 3,
     "status": "true",
     "category": "Bebidas",
     "thumbnails": [

@@ -4,15 +4,11 @@
     "products": [
       {
         "id": 1,
-        "quantity": 2
-      },
-      {
-        "id": 2,
         "quantity": 3
       },
       {
         "id": 2,
-        "quantity": 1
+        "quantity": 5
       }
     ]
   },
@@ -27,6 +23,15 @@
   },
   {
     "id": "ecd14538-e694-4158-a25f-d79ba8ad734e",
+    "products": [
+      {
+        "id": 3,
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": "58dee221-6683-465e-9af9-9db3601fd602",
     "products": []
   }
 ]
