@@ -47,8 +47,8 @@ router.get('/:cartId', async (req, res) => {
 router.post('/:cartId/product/:productId', async (req, res) => {
     try {
         const cartId = req.params.cartId;
-        const productId = req.params.productId; // Asegúrate de que el nombre del parámetro sea correcto
-        const quantity = req.body.quantity; // Asegúrate de que la cantidad se envíe en el cuerpo de la solicitud
+        const productId = req.params.productId;
+        const quantity = req.body.quantity; // Debe enviarse  la cantidad  en el cuerpo de la solicitud
 
         // Agregar el producto al carrito
         const updatedCart = await cartManager.addProductToCart(cartId, productId, quantity);
