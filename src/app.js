@@ -1,22 +1,38 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-
+const exphbs = require('express-handlebars');
+const http = require('http');
+const socketIo = require('socket.io');
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 const PORT = 8080;
 
 app.use(bodyParser.json());
+
+
+//Middleware para servir archivos estáticos desde la carpeta 'public ( si la necesitamos dentro de la carpeta src)'
+app.use('/static', express.static(__dirname + '/public'))
+
+// Configuración de Handlebars
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 // Importa y utiliza las rutas
 const productRoutes = require('./routes/routes'); // Cambiado el camino de importación
 const cartRoutes = require('./routes/cartRoutes'); // Cambiado el camino de importación
 const { CartManager } = require('../CartManager'); // Cambiado el camino de importación
+const { ProductManager } = require('../ProductManager');
+const viewsRouter = require('./routes/viewsRouter');
 
 
 app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes); // Cambiado el camino de importación
+
+// Usar el router de vistas en la ruta raíz
+app.use('/', viewsRouter);
 
 // Crea una instancia de CartManager
 const cartManager = new CartManager(path.join(__dirname, '../files/carts.json'));
@@ -59,3 +75,6 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Servidor Express corriendo en http://localhost:${PORT}`);
 });
+
+
+

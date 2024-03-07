@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const { ProductManager } = require('../../ProductManager');
-
+const uploader = require('../utils'); // Importar el uploader desde utils
 
 const productManager = new ProductManager(path.join(__dirname, '../../files/products.json'));
 
@@ -76,16 +76,13 @@ router.delete('/:productId', async (req, res) => {
     }
 });
 
-/* Ruta para crear un nuevo carrito
-router.post('/api/carts/', async (req, res) => {
-    try {
-        // Lógica para crear un nuevo carrito utilizando CartManager
-        const newCart = await cartManager.createCart();
-        res.json({ message: 'Nuevo carrito creado', cart: newCart });
-    } catch (error) {
-        res.status(500).json({ error: 'Error al crear un nuevo carrito' });
-    }
-});*/
 
+// Ruta para manejar la subida de archivos que se guardaran en la carpeta public (logica en el archivo utils)
+router.post('/upload', uploader.array('files'), (req, res) => {
+    // req.files contendrá los archivos subidos
+    console.log(req.files);
+    // Lógica para manejar los archivos subidos
+    res.send('Archivos subidos exitosamente.');
+});
 
 module.exports = router;
