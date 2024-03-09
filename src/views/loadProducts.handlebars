@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Productos</title>
+</head>
+<body>
+    <h1>Cargar Productos</h1>
+    <form id="form-cargar-producto"  action="/api/addProduct" method="post">
+        <label for="title">Título:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="description">Descripción:</label><br> <!-- Agregar campo de descripción -->
+        <input type="text" id="description" name="description"><br>
+        <label for="price">Precio:</label><br>
+        <input type="text" id="price" name="price"><br>
+        <label for="thumbnail">URL de la imagen:</label><br> <!-- Agregar campo de URL de la imagen -->
+        <input type="text" id="thumbnail" name="thumbnail"><br>
+        <label for="code">Código:</label><br> <!-- Agregar campo de código -->
+        <input type="text" id="code" name="code"><br>
+        <label for="stock">Stock:</label><br> <!-- Agregar campo de stock -->
+        <input type="text" id="stock" name="stock"><br>
+        <label for="status">Estado:</label><br> <!-- Agregar campo de estado -->
+        <input type="text" id="status" name="status"><br>
+        <label for="category">Categoría:</label><br> <!-- Agregar campo de categoría -->
+        <input type="text" id="category" name="category"><br>
+        <label for="thumbnails">Rutas de las imágenes (separadas por comas):</label><br> <!-- Agregar campo de rutas de las imágenes -->
+        <input type="text" id="thumbnails" name="thumbnails"><br><br>
+        <button type="submit">Agregar Producto</button>
+    </form>
+   <script src="/socket.io/socket.io.js"></script>
+<script src="../public/JS/loadProducts.js"></script>
+</body>
+</html>
+

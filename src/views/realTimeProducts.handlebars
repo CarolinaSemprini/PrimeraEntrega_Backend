@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Products</title>
+</head>
+<body>
+    <h1>Real Time Products</h1>
+    <ul id="lista-productos">
+        {{#each products}}
+            <li data-id="{{this.id}}">{{this.title}} - {{this.price}}</li>
+        {{/each}}
+    </ul>
+
+    <script src="/socket.io/socket.io.js"></script> <!-- Incluir el cliente de Socket.IO -->
+    <script src="/js/realTimeProducts.js"></script> <!-- Referencia al archivo JavaScript externo -->
+</body>
+</html>

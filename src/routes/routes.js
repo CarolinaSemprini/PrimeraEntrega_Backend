@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+
 const { ProductManager } = require('../../ProductManager');
 const uploader = require('../utils'); // Importar el uploader desde utils
 
@@ -76,7 +77,10 @@ router.delete('/:productId', async (req, res) => {
     }
 });
 
-
+// Ruta para cargar la página de carga de productos
+router.get('/api/addProduct', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/loadProducts.handlebars'));
+});
 // Ruta para manejar la subida de archivos que se guardaran en la carpeta public (logica en el archivo utils)
 router.post('/upload', uploader.array('files'), (req, res) => {
     // req.files contendrá los archivos subidos

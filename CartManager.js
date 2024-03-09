@@ -2,9 +2,11 @@ const fs = require("fs").promises;
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { ProductManager } = require('./ProductManager');
+const EventEmitter = require('events');
 
-class CartManager {
+class CartManager extends EventEmitter {
     constructor(filePath) {
+        super();
         this.path = filePath;
         this.productManager = new ProductManager(path.join(__dirname, './files/products.json'));
         this.createFileIfNotExists();
@@ -145,6 +147,9 @@ class CartManager {
             await this.productManager.updateProductStock(productId, updatedStock);
 
             await this.saveCarts(carts);
+
+            // Emitir evento 'productoAgregado' con los detalles del producto agregado al carrito
+            this.emit('productoAgregado', { cartId, productId, quantity });
 
             return carts[cartIndex];
         } catch (error) {

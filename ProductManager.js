@@ -1,9 +1,13 @@
+//ProductManager.js
+
 const fs = require("fs").promises;
 const { createInterface } = require("readline");
 const path = require('path');
+const EventEmitter = require('events');
 
-class ProductManager {
+class ProductManager extends EventEmitter {
     constructor(filePath) {
+        super();
         this.path = filePath;
         this.products = [];
         this.createFileIfNotExists();
@@ -107,6 +111,10 @@ class ProductManager {
                 await fs.writeFile(this.path, JSON.stringify(this.products, null, 2), { encoding: 'utf-8' });
 
                 console.log("Producto agregado:", newProduct);
+
+                // Emitir evento 'productoAgregado' con los detalles del producto
+                this.emit('productoAgregado', newProduct)
+
             } else {
                 console.error("El código del producto ya existe");
             }

@@ -56,5 +56,71 @@
     "thumbnails": [
       ""
     ]
+  },
+  {
+    "title": "sdas",
+    "description": "asda",
+    "price": "33",
+    "thumbnail": "faf",
+    "code": "3333",
+    "stock": "33",
+    "status": "dfd",
+    "category": "dfd",
+    "thumbnails": "dfdf"
+  },
+  {
+    "title": "caramelos",
+    "description": "caramelos",
+    "price": "333",
+    "thumbnail": "url",
+    "code": "code345",
+    "stock": "34",
+    "status": "true",
+    "category": "alimentos",
+    "thumbnails": "url"
+  },
+  {
+    "title": "pizzas",
+    "description": "anana",
+    "price": "3",
+    "thumbnail": "url",
+    "code": "code34544",
+    "stock": "34",
+    "status": "true",
+    "category": "alimentos",
+    "thumbnails": "url"
+  },
+  {
+    "title": "sdsd",
+    "description": "sdsd",
+    "price": "33",
+    "thumbnail": "sd",
+    "code": "3333",
+    "stock": "333",
+    "status": "sdsd",
+    "category": "sdsd",
+    "thumbnails": "url"
+  },
+  {
+    "title": "CAROLINA",
+    "description": "sdsd",
+    "price": "33",
+    "thumbnail": "sd",
+    "code": "3333",
+    "stock": "333",
+    "status": "sdsd",
+    "category": "sdsd",
+    "thumbnails": "url"
+  },
+  {
+    "title": "empanadas",
+    "description": "empanadas",
+    "price": "222",
+    "thumbnail": "url",
+    "code": "codeempanadas",
+    "stock": "34",
+    "status": "true",
+    "category": "empanadas",
+    "thumbnails": "url"
   }
 ]
