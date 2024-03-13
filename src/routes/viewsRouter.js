@@ -23,12 +23,12 @@ router.post('/login', (req, res) => {
         res.redirect('/loadProducts');
     } else {
         // Si no, redirige a la lista de productos
-        res.redirect('/products');
+        res.redirect('/home');
     }
 });
 
 // Ruta para mostrar la lista de productos
-router.get('/products', async (req, res) => {
+router.get('/home', async (req, res) => {
     try {
         const products = await productManager.getProducts();
         res.render('home', { products });

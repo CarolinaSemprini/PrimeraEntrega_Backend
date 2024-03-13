@@ -7,11 +7,20 @@
 </head>
 <body>
     <h1>Real Time Products</h1>
-    <ul id="lista-productos">
-        {{#each products}}
-            <li data-id="{{this.id}}">{{this.title}} - {{this.price}}</li>
-        {{/each}}
-    </ul>
+    <div id="mensaje-conexion">
+        <h1>cliente conectado</h1>
+    </div>
+    <div class="product-container">
+    {{#each products}}
+        <div class="product-card">
+            <img class="product-image" src="{{this.thumbnail}}" alt="{{this.title}}">
+            <h2 class="product-title">{{this.title}}</h2>
+            <p class="product-description">{{this.description}}</p>
+            <p class="product-price">${{this.price}}</p>
+            <button class="buy-button">Comprar</button>
+        </div>
+    {{/each}}
+</div>
 
     <script src="/socket.io/socket.io.js"></script> <!-- Incluir el cliente de Socket.IO -->
     <script src="/js/realTimeProducts.js"></script> <!-- Referencia al archivo JavaScript externo -->

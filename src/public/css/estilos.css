@@ -1,0 +1,136 @@
+/* Estilos para el navbar */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Ajusta la altura según sea necesario */
+}
+
+/* Estilos para el navbar */
+nav {
+    position: relative;
+    display: inline-block;
+}
+
+/* Estilos para el navbar */
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: #88400c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px; /* Espacio entre los botones */
+}
+
+/* Estilos para el botón de iniciar sesión */
+.btn-primary {
+    width: auto;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 20px; /* Espacio entre los botones */
+}
+
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para el botón del carrito de compras */
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 20px; /* Espacio entre los botones */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+
+
+/* Estilos generales para el contenedor de los productos */
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Estilos para cada tarjeta de producto */
+.product-card {
+    background-color: #8d8989;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Estilos para la imagen del producto */
+.product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Estilos para el título del producto */
+.product-title {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Estilos para la descripción del producto */
+.product-description {
+    font-size: 14px;
+    color: #120303;
+    margin-top: 5px;
+}
+
+/* Estilos para el precio del producto */
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Estilos para el botón de compra */
+.buy-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+}

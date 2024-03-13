@@ -8,7 +8,7 @@ const { ProductManager } = require('../ProductManager');
 const { CartManager } = require('../CartManager');
 const viewsRouter = require('./routes/viewsRouter');
 const fs = require('fs').promises;
-
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const server = http.createServer(app);
@@ -25,20 +25,21 @@ const hbs = create({
     /* Opciones de Handlebars */
     extname: '.handlebars',
     defaultLayout: 'main',
-    helpers: { /* ... */ }
+    helpers: { /* ... */ },
+    layoutsDir: path.join(__dirname, 'views', 'layouts'), // Ruta a la carpeta de layouts
+    partialsDir: path.join(__dirname, 'views') // Opcional: ruta a la carpeta de partials si la tienes
 });
+
+
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 
 
-/*Middleware para servir archivos estáticos desde la carpeta 'public ( si la necesitamos dentro de la carpeta src)'
-app.use('/static', express.static(__dirname + '/public'))*/
-
 // Middleware para servir archivos estáticos desde la carpeta 'public'
-app.use(express.static(path.join(__dirname, 'src', 'public')));
-app.use(express.static('public', {
+//app.use(express.static(path.join(__dirname, 'src', 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public'), {
     setHeaders: function (res, path, stat) {
         if (path.endsWith('.js')) {
             res.setHeader('Content-Type', 'application/javascript');
@@ -46,10 +47,12 @@ app.use(express.static('public', {
     }
 }));
 
-
 // Configurar el servidor Socket.IO
 io.on('connection', (socket) => {
     console.log('Nuevo cliente conectado');
+
+    // Enviar mensaje al cliente indicando que se ha conectado
+    socket.emit('clienteConectado', '¡Cliente conectado!');
 
     // Escuchar eventos del ProductManager
     productManager.on('productoAgregado', (producto) => {
@@ -84,6 +87,11 @@ app.use('/api/carts', cartRoutes);
 // Mostrar todos los carritos
 cartManager.displayAllCarts();
 
+// Ruta para cargar la vista principal
+app.get('/', (req, res) => {
+    res.render('home', { products: [] }); // Renderizar la vista main.handlebars con un arreglo de productos vacío
+});
+
 // Ruta para mostrar todos los carritos
 app.get('/api/carts', async (req, res) => {
     try {
@@ -114,14 +122,13 @@ app.post('/login', (req, res) => {
         res.redirect('/loadProducts');
     } else {
         // Si no, redirige a la lista de productos
-        res.redirect('/products');
+        res.redirect('/home');
     }
 });
 
-// Ruta para cargar la vista principal
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src', 'views', 'main.handlebars'));
-});
+
+
+
 
 // Ruta para agregar un nuevo producto desde la vista loadProducts.handlebars
 app.post('/api/addProduct', async (req, res) => {
@@ -129,8 +136,12 @@ app.post('/api/addProduct', async (req, res) => {
         // Obtener los datos del producto del cuerpo de la solicitud
         const { title, description, price, thumbnail, code, stock, status, category, thumbnails } = req.body;
 
+        // Generar un nuevo ID único para el producto
+        const id = uuidv4();
+
         // Crear el objeto del producto
         const newProduct = {
+            id,
             title,
             description,
             price,
@@ -146,6 +157,12 @@ app.post('/api/addProduct', async (req, res) => {
         const productsFilePath = path.join(__dirname, '../files/products.json');
         const productsData = await fs.readFile(productsFilePath, 'utf-8');
         const products = JSON.parse(productsData);
+
+
+        // Si la lista de productos está vacía, inicialízala como un array vacío
+        if (!Array.isArray(products)) {
+            products = [];
+        }
 
         // Agregar el nuevo producto a la lista de productos
         products.push(newProduct);

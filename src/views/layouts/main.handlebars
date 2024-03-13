@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/estilos.css">
     <title>Lista de Productos</title>
 </head>
 <body>
-    <h1>Listado de Productos</h1>
+    <header>
+        <!-- Navbar con categorías de productos -->
+        <nav>
+            <ul>
+                <li><a href="#">Mates</a></li>
+                <li><a href="#">Yerbas</a></li>
+                <li><a href="#">Termos</a></li>
+                <!-- Agrega más categorías según sea necesario -->
+            </ul>
+        </nav>
 
+        <!-- Botón para iniciar sesión -->
+        <a href="/login" class="btn btn-primary">Agragar Productos</a>
+
+        <!-- Botón para acceder al carrito de compras -->
+        <a href="/realtimeproducts" class="btn btn-secondary">realtimeproducts</a>
+         <a href="/home" class="btn btn-primary">Inicio</a>
+    </header>
+
+    <!-- Contenido dinámico renderizado por otras vistas -->
     {{{body}}}
-    <ul>
-        {{#each products}}
-            <li>{{this.title}} - {{this.description}} - ${{this.price}}</li>
-        {{/each}}
-    </ul>
-</body>
-</html>

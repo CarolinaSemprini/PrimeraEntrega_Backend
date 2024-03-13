@@ -3,6 +3,12 @@
 // Conectarse al servidor Socket.IO
 const socket = io();
 
+// Escuchar el evento 'clienteConectado' para mostrar el mensaje
+socket.on('clienteConectado', (mensaje) => {
+    // Mostrar el mensaje en la página
+    document.getElementById('mensaje-conexion').innerText = mensaje;
+});
+
 // Obtener la lista de productos
 const productList = document.querySelector('ul');
 

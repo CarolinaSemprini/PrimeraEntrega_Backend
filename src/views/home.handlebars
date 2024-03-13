@@ -1,0 +1,20 @@
+
+    <div class="product-container">
+        
+    {{#each products}}
+        <div class="product-card">
+            <img class="product-image" src="{{this.thumbnail}}" alt="{{this.title}}">
+            <h2 class="product-title">{{this.title}}</h2>
+            <p class="product-description">{{this.description}}</p>
+            <p class="product-price">${{this.price}}</p>
+            <button class="buy-button">Comprar</button>
+        </div>
+    {{/each}}
+    
+</div>
+
+
+
+
+
+    
